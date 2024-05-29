@@ -1,0 +1,43 @@
+{% extends request.session.path %}
+
+{% block content %}
+<h3 class="alert alert-success p-2 text-center">Add Image</h3>
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-md">
+            <div class="form-floating mb-3">
+                <input type="file" name="image" class="form-control" placeholder="Image" required>
+                <label>Image</label>
+            </div>
+            <div class="mb-3">
+                <label>Description</label>
+                <textarea name="descr" class="form-control" placeholder="Description" rows="5" required></textarea>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="row">
+                <div class="col col-md-12">
+                    <button class="btn btn-success p-3 form-control mb-3">Save</button>
+                </div>
+                <div class="col col-md-12">
+                    <a href="{% url request.session.group|add:'_image' %}" class="btn btn-warning p-3 form-control">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% if form.errors %}
+<div class="alert alert-danger text-center mt-3 pt-3 pb-0">
+    <ul>
+        {% for f in form %}
+        <li>{{f.label}}
+            {% if f.errors %}
+            {{f.errors}}
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+{% endblock content %}

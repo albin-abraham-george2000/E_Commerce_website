@@ -1,0 +1,26 @@
+UserDetails:username, first_name, last_name, email, password, address, contact, groups
+
+existing/default Tables
+-----------------------
+User:- username, first_name, last_name, email, password
+Group: - group
+
+New/custom Tables
+----------------
+UserInfo (inherits User):-  address, contact
+
+Catagory:- id#, cat_name
+
+Image (id#, image, descr)
+
+Product:- id#, item, descr, category (FK to Catagory),image (FK to Image)
+
+Stock:- id#, product (FK to Product), price, quantity, mfg_date, exp_date, stock_date
+
+Cart:- id#, stock (FK to Stock), user (FK to UserInfo)
+
+Bill:- id#, bill_date, user (FK to UserInfo)
+
+PurchaseStatus:- #id, status
+
+Purchase:- id#, bill (FK to Bill), stock (FK to Stock), quantity, status (FK to PurchaseStatus)

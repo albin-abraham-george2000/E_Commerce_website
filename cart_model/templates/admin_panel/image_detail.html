@@ -1,0 +1,22 @@
+{% extends request.session.path %}
+
+{% block content %}
+<h3 class="alert alert-success p-2 text-center">Image Details</h3>
+<div class="row text-center">
+    <div class="col-md">
+        <div class="form-floating mb-3">
+            <img src="{{datas.image.url}}" alt="{{datas.descr}}" height="300px">
+        </div>
+        <div class="mb-3">
+            <h4 class="text-success"> {{datas.descr}}</h4>
+        </div>
+    </div>
+    <div class="col-md">
+        <div class="row">
+            <div class="col col-md-12">
+                <a href="{% url request.session.group|add:'_image' %}" class="btn btn-warning p-3 form-control">Cancel</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

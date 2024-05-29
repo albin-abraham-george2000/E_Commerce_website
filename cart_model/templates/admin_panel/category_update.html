@@ -1,0 +1,27 @@
+{% extends request.session.path %}
+
+{% block content %}
+<h3 class="alert alert-danger p-2 text-center">Do you want to edit this Category ?</h3>
+<form action="" method="post">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-md">
+            <div class="form-floating mb-3">
+                <input type="text" value="{{datas.cat_name}}" name="cat_name" class="form-control" placeholder="Category" required>
+                <label>Category</label>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-primary p-3 form-control mb-3">Update</button>
+                </div>
+                <div class="col">
+                    <a href="{% url request.session.group|add:'_category' %}" class="btn btn-warning p-3 form-control">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock content %}

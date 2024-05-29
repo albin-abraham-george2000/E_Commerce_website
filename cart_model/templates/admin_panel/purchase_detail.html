@@ -1,0 +1,42 @@
+{% extends request.session.path %}
+
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    <h3 class="alert alert-danger p-2 text-center">Want to Update Status ?</h3>
+    <div class="row">
+        <div class="col-md">
+            <div class="form-floating mb-3">
+                <input type="text" value="{{datas.bill.bill_date}}" class="form-control" placeholder="Bill Date"
+                    readonly>
+                <label>Bill Date</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" value="{{datas.stock.product}}" class="form-control" placeholder="Product" readonly>
+                <label>Product</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" value="{{datas.stock.price}}" class="form-control" placeholder="Price" readonly>
+                <label>Price</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" value="{{datas.quantity}}" class="form-control" placeholder="Quantity" readonly>
+                <label>Quantity</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" value="{{datas.status}}" class="form-control" placeholder="Status" readonly>
+                <label>Status</label>
+            </div>
+        </div>
+        <div class="col-md text-center">
+            <img src="{{datas.stock.product.image.image.url}}" alt="{{datas.stock.product.image.descr}}" height="295px">
+            <div class="row">
+                <div class="col-md mb-3">
+                    <a href="{% url request.session.group|add:'_purchase' %}" class="btn btn-warning p-3 form-control">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock content %}

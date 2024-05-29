@@ -1,0 +1,63 @@
+{% extends request.session.path %}
+
+{% block content %}
+<h3 class="alert alert-success p-2 text-center">User Details</h3>
+<div class="row">
+    <div class="col-md">
+        <div class="row">
+            <div class="col-md">
+                <div class="form-floating mb-3">
+                    <input type="text" name="first_name" class="form-control" value="{{datas.first_name}}" readonly>
+                    <label>First Name</label>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="form-floating mb-3">
+                    <input type="text" name="last_name" class="form-control" value="{{datas.last_name}}" readonly>
+                    <label>Last Name</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md">
+                <div class="form-floating mb-3">
+                    <input type="email" name="email" class="form-control" value="{{datas.email}}" readonly>
+                    <label>E-Mail</label>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="form-floating mb-3">
+                    <input type="text" name="contact" class="form-control" value="{{datas.contact}}" readonly>
+                    <label>Contact</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md">
+                <div class="mb-3">
+                    <label>Address</label>
+                    <textarea name="address" rows="5" class="form-control" readonly>{{datas.address}}</textarea>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="form-floating mb-3">
+                    <input type="text" value="{{datas.groups.all.0}}" class="form-control" readonly>
+                    <label>Group</label>
+                </div>
+                <div class="row mt-5">
+                    <div class="col">
+                        <a href="{% url request.session.group|add:'_user' %}" class="btn btn-warning p-3 form-control">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    $(() => {
+        $('select').attr('class', 'form-control')
+        $('select').removeAttr('multiple')
+    })
+</script>
+{% endblock content %}

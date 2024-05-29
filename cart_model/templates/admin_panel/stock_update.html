@@ -1,0 +1,70 @@
+{% extends request.session.path %}
+
+{% block content %}
+<h3 class="alert alert-danger p-2 text-center">Modify Stock ?</h3>
+<form action="" method="post">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-md">
+            <div class="form-floating mb-3">
+                {{form.product}}
+                <label>Product</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" name="price" class="form-control" value="{{datas.price}}" placeholder="Price" required>
+                <label>Price</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" name="quantity" class="form-control" value="{{datas.quantity}}" placeholder="Quantity" required>
+                <label>Quantity</label>
+            </div>
+        </div>
+        <div class="col-md mb-5">
+            <div class="form-floating mb-3">
+                {{form.stock_date}}
+                <label>Stock Date</label>
+            </div>
+            <div class="form-floating mb-3">
+                {{form.mfg_date}}
+                <label>Mfg. Date</label>
+            </div>
+            <div class="form-floating mb-3">
+                {{form.exp_date}}
+                <label>Expiry Date</label>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-primary p-3 form-control mb-3">Update</button>
+                </div>
+                <div class="col">
+                    <a href="{% url request.session.group|add:'_stock' %}" class="btn btn-warning p-3 form-control">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% if form.errors %}
+<div class="alert alert-danger text-center mt-3 pt-3 pb-0">
+    <ul>
+        {% for f in form %}
+        <li>{{f.label}}
+            {% if f.errors %}
+            {{f.errors}}
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+<script>
+    $(() => {
+        $('select').attr('class', 'form-control')
+        $('#id_stock_date').attr('class', 'form-control')
+        $('#id_stock_date').attr('type', 'date')
+        $('#id_mfg_date').attr('class', 'form-control')
+        $('#id_mfg_date').attr('type', 'date')
+        $('#id_exp_date').attr('class', 'form-control')
+        $('#id_exp_date').attr('type', 'date')
+    })
+</script>
+{% endblock content %}

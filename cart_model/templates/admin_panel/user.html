@@ -1,0 +1,38 @@
+{% extends request.session.path %}
+
+{% block content %}
+<div class="float-end mb-3">
+    <a href="{% url request.session.group|add:'_user_create' %}" class="btn btn-info">New</a>
+</div>
+
+<table class="table table-bordered table-hover table-striped">
+    <thead class="table-success">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>E-Mail</th>
+            <th>Address</th>
+            <th>Contact</th>
+            <th>Group</th>
+            <th>Modify</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for d in datas %}
+        <tr>
+            <td> {{d.first_name}} </td>
+            <td> {{d.last_name}} </td>
+            <td> {{d.email}} </td>
+            <td> {{d.address}} </td>
+            <td> {{d.contact}} </td>
+            <td> {{d.groups.all.0}} </td>
+            <td style="width: 300px;">
+              <a href="{% url request.session.group|add:'_user_detail' d.id %}" class="btn btn-info"><i class="bi bi-card-list"></i> Detail</a>  
+              <a href="{% url request.session.group|add:'_user_update' d.id %}" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Edit</a>  
+              <a href="{% url request.session.group|add:'_user_delete' d.id %}" class="btn btn-danger"><i class="bi bi-trash3-fill"></i> Delete</a>  
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

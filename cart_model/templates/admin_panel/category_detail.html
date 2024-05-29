@@ -1,0 +1,21 @@
+{% extends request.session.path %}
+
+{% block content %}
+<h3 class="alert alert-success p-2 text-center"> Category Details</h3>
+<div class="row">
+    <div class="col-md">
+        <div class="form-floating mb-3">
+            <input type="text" value="{{datas.cat_name}}" name="cat_name" class="form-control" placeholder="Category"
+                readonly>
+            <label>Category</label>
+        </div>
+    </div>
+    <div class="col-md">
+        <div class="row">
+            <div class="col">
+                <a href="{% url 'admin_category' %}" class="btn btn-warning p-3 form-control">Cancel</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

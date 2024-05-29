@@ -1,0 +1,89 @@
+{% extends request.session.path %}
+
+{% block content %}
+<h3 class="alert alert-danger p-2 text-center">Modify this user details ? </h3>
+<form action="" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="username" id="username" value="{{datas.username}}" required>
+    <div class="row">
+        <div class="col-md">
+            <div class="row">
+                <div class="col-md">
+                    <div class="form-floating mb-3">
+                        <input type="text" name="first_name" class="form-control" placeholder="First Name"
+                            pattern="[a-z A-Z]*" value="{{datas.first_name}}" required>
+                        <label>First Name</label>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="form-floating mb-3">
+                        <input type="text" name="last_name" class="form-control" placeholder="Last Name"
+                            pattern="[a-z A-Z]*" value="{{datas.last_name}}" required>
+                        <label>Last Name</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <div class="form-floating mb-3">
+                        <input type="email" id="email" name="email" class="form-control" placeholder="E-Mail"
+                            value="{{datas.email}}" required>
+                        <label>E-Mail</label>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="form-floating mb-3">
+                        <input type="text" name="contact" class="form-control" placeholder="Contact"
+                            pattern="[0-9]{10,12}" value="{{datas.contact}}" required>
+                        <label>Contact</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <div class="mb-3">
+                        <label>Address</label>
+                        <textarea name="address" rows="5" class="form-control" placeholder="Address"
+                            required>{{datas.address}}</textarea>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="form-floating mb-3">
+                        {{form.groups}}
+                        <label>Group</label>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col">
+                            <button class="btn btn-primary p-3 form-control mb-3">Update</button>
+                        </div>
+                        <div class="col">
+                            <a href="{% url request.session.group|add:'_user' %}" class="btn btn-warning p-3 form-control">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>
+{% if form.errors %}
+<div class="alert alert-danger text-center mt-3 pt-3 pb-0">
+    <ul>
+        {% for f in form %}
+        {% if f.errors %}
+        <li> {{f.label}} {{f.errors}}</li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+<script>
+    $(() => {
+        $('select').attr('class', 'form-control')
+        $('select').removeAttr('multiple')
+        $('#email').blur(() => {
+            $('#username').val($('#email').val())
+        })
+    })
+</script>
+{% endblock content %}

@@ -1,0 +1,64 @@
+{% extends request.session.path %}
+
+{% block content %}
+<h3 class="alert alert-success p-2 text-center">Add Stock</h3>
+<form action="" method="post">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-md">
+            <div class="form-floating mb-3">
+                {{form.product}}
+                <label>Product</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" name="price" class="form-control" placeholder="Price" required>
+                <label>Price</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" name="quantity" class="form-control" placeholder="Quantity" required>
+                <label>Quantity</label>
+            </div>
+        </div>
+        <div class="col-md mb-5">
+            <div class="form-floating mb-3">
+                <input type="date" name="stock_date" class="form-control" placeholder="Stock Date" required>
+                <label>Stock Date</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="date" name="mfg_date" class="form-control" placeholder="Mfg. Date" required>
+                <label>Mfg. Date</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="date" name="exp_date" class="form-control" placeholder="Exp. Date" required>
+                <label>Expiry Date</label>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-success p-3 form-control mb-3">Save</button>
+                </div>
+                <div class="col">
+                    <a href="{% url request.session.group|add:'_stock' %}" class="btn btn-warning p-3 form-control">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% if form.errors %}
+<div class="alert alert-danger text-center mt-3 pt-3 pb-0">
+    <ul>
+        {% for f in form %}
+        <li>{{f.label}}
+            {% if f.errors %}
+            {{f.errors}}
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+<script>
+    $(() => {
+        $('select').attr('class', 'form-control')
+    })
+</script>
+{% endblock content %}

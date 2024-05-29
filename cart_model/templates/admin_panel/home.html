@@ -1,0 +1,176 @@
+{% extends request.session.path %}
+
+{% block content %}
+<h3 class="alert alert-primary p-1">
+    <div class="row">
+        <div class="col text-success text-center"> Stock Details</div>
+        <div class="col-7 col-md-4">
+            <form action="">
+                <div class="input-group">
+                    <input type="search" placeholder="Search" class="form-control border border-success rounded-start-3"
+                        name="f">
+                    <button class="btn btn-warning  border border-success rounded-end-3">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</h3>
+
+<table class="table table-bordered table-hover table-striped">
+    <thead class="table-success">
+        <tr>
+            <th>
+                {% if c == 'product' %}
+                {% if d == 'asc' %}
+                <a href="?c=product&d=desc&f={{filt}}">
+                    Product <i class="bi bi-sort-alpha-down"></i>
+                </a>
+                {% else %}
+                <a href="?c=product&d=asc&f={{filt}}">
+                    Product <i class="bi bi-sort-alpha-down-alt"></i>
+                </a>
+                {% endif %}
+                {% else %}
+                <a href="?c=product&d=desc&f={{filt}}">Product</i>
+                </a>
+                {% endif %}
+            </th>
+            <th>
+                {% if c == 'product__image' %}
+                {% if d == 'asc' %}
+                <a href="?c=product__image&d=desc&f={{filt}}">
+                    Image <i class="bi bi-sort-alpha-down"></i>
+                </a>
+                {% else %}
+                <a href="?c=product__image&d=asc&f={{filt}}">
+                    Image <i class="bi bi-sort-alpha-down-alt"></i>
+                </a>
+                {% endif %}
+                {% else %}
+                <a href="?c=product__image&d=desc&f={{filt}}">Image</i>
+                    {% endif %}
+            </th>
+            <th>
+                {% if c == 'product__category' %}
+                {% if d == 'asc' %}
+                <a href="?c=product__category&d=desc&f={{filt}}">
+                    Category <i class="bi bi-sort-alpha-down"></i>
+                </a>
+                {% else %}
+                <a href="?c=product__category&d=asc&f={{filt}}">
+                    Category <i class="bi bi-sort-alpha-down-alt"></i>
+                </a>
+                {% endif %}
+                {% else %}
+                <a href="?c=product__category&d=desc&f={{filt}}">Category</i>
+                    {% endif %}
+            </th>
+            <th>
+                {% if c == 'price' %}
+                {% if d == 'asc' %}
+                <a href="?c=price&d=desc&f={{filt}}">
+                    Price <i class="bi bi-sort-numeric-down"></i>
+                </a>
+                {% else %}
+                <a href="?c=price&d=asc&f={{filt}}">
+                    Price <i class="bi bi-sort-numeric-down-alt"></i>
+                </a>
+                {% endif %}
+                {% else %}
+                <a href="?c=price&d=desc&f={{filt}}">Price</i>
+                    {% endif %}
+            </th>
+            <th>
+                {% if c == 'quantity' %}
+                {% if d == 'asc' %}
+                <a href="?c=quantity&d=desc&f={{filt}}">
+                    Quantity <i class="bi bi-numeric-alpha-down"></i>
+                </a>
+                {% else %}
+                <a href="?c=quantity&d=asc&f={{filt}}">
+                    Quantity <i class="bi bi-numeric-alpha-down-alt"></i>
+                </a>
+                {% endif %}
+                {% else %}
+                <a href="?c=quantity&d=desc&f={{filt}}">Quantity</i>
+                    {% endif %}
+            </th>
+            
+            <th>
+                {% if c == 'mfg_date' %}
+                {% if d == 'asc' %}
+                <a href="?c=mfg_date&d=desc&f={{filt}}">
+                    Mfg.Date <i class="bi bi-sort-alpha-down"></i>
+                </a>
+                {% else %}
+                <a href="?c=mfg_date&d=asc&f={{filt}}">
+                    Mfg.Date <i class="bi bi-sort-alpha-down-alt"></i>
+                </a>
+                {% endif %}
+                {% else %}
+                <a href="?c=mfg_date&d=desc&f={{filt}}">Mfg.Date</i>
+                    {% endif %}
+            </th>
+            <th>
+                {% if c == 'exp_date' %}
+                {% if d == 'asc' %}
+                <a href="?c=exp_date&d=desc&f={{filt}}">
+                    Exp.Date <i class="bi bi-sort-alpha-down"></i>
+                </a>
+                {% else %}
+                <a href="?c=exp_date&d=asc&f={{filt}}">
+                    Exp.Date <i class="bi bi-sort-alpha-down-alt"></i>
+                </a>
+                {% endif %}
+                {% else %}
+                <a href="?c=exp_date&d=desc&f={{filt}}">Exp.Date</i>
+                    {% endif %}
+            </th>
+            <th>
+                {% if c == 'stock_date' %}
+                {% if d == 'asc' %}
+                <a href="?c=stock_date&d=desc&f={{filt}}">
+                    Stock_Date <i class="bi bi-sort-alpha-down"></i>
+                </a>
+                {% else %}
+                <a href="?c=stock_date&d=asc&f={{filt}}">
+                    Stock_Date <i class="bi bi-sort-alpha-down-alt"></i>
+                </a>
+                {% endif %}
+                {% else %}
+                <a href="?c=stock_date&d=desc&f={{filt}}">Stock_Date</i>
+                    {% endif %}
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for d in datas %}
+        <tr>
+            <td> {{d.product}} </td>
+            <td><img height="25px" src="{{d.product.image.image.url}}" alt="{{d.product.image.descr}}"></td>
+            <td> {{d.product.category}} </td>
+            <td> {{d.price}} </td>
+            <td> {{d.quantity}} </td>
+            <td> {{d.mfg_date}} </td>
+            <td> {{d.exp_date}} </td>
+            <td> {{d.stock_date}} </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <th colspan="8">
+                {% for i in page_obj.paginator.page_range %}
+                {% if i == page_obj.number%}
+                <span class="btn btn-success"> {{i}} </span>
+                {% else %}
+                <a href="?page={{i}}&f={{filt}}&c={{c}}&d={{d}}" class="btn btn-primary"> {{i}} </a>
+                {% endif %}
+                {% endfor %}
+            </th>
+        </tr>
+    </tfoot>
+</table>
+{% endblock content %}

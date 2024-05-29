@@ -1,0 +1,28 @@
+{% extends request.session.path %}
+
+{% block content %}
+<div class="float-end mb-3">
+    <a href="{% url request.session.group|add:'_category_create' %}" class="btn btn-info">New</a>
+</div>
+
+<table class="table table-bordered table-hover table-striped">
+    <thead class="table-success">
+        <tr>
+            <th>Category</th>
+            <th>Modify</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for d in datas %}
+        <tr>
+            <td> {{d.cat_name}} </td>
+            <td style="width: 300px;">
+              <a href="{% url request.session.group|add:'_category_detail' d.id %}" class="btn btn-info"><i class="bi bi-card-list"></i> Detail</a>  
+              <a href="{% url request.session.group|add:'_category_update' d.id %}" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Edit</a>  
+              <a href="{% url request.session.group|add:'_category_delete' d.id %}" class="btn btn-danger"><i class="bi bi-trash3-fill"></i> Delete</a>  
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

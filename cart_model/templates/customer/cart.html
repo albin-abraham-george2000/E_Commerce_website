@@ -1,0 +1,126 @@
+{% extends "customer/layout.html" %}
+{% block content %}
+{% load static %}
+<!-- Cart Page Start -->
+<form action="/customer/checkout/" method="post">
+    {% csrf_token %}
+
+    <div class="container-fluid py-5 mt-5">
+        <div class="container py-5">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Products</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Handle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for c in datas %}
+                        <tr>
+                            <th scope="row">
+                                <div class="d-flex align-items-center">
+                                    <img src="{{c.stock.product.image.image.url}}" class="img-fluid me-5 rounded-circle"
+                                        style="width: 80px; height: 80px;" alt="{{c.stock.product.image.descr}}">
+                                </div>
+                            </th>
+                            <td>
+                                <p class="mb-0 mt-4"> {{c.stock.product}} </p>
+                            </td>
+                            <td>
+                                <p class="mb-0 mt-4 price">{{c.stock.price}} &#8377;</p>
+                            </td>
+                            <td>
+                                <input type="hidden" name="cart_id" value="{{c.id}}" readonly>
+                                <div class="input-group quantity mt-4" style="width: 100px;">
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-sm btn-minus rounded-circle bg-light border">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                    <input type="text" name="quantity" readonly
+                                        class="form-control bg-white form-control-sm text-center border-0" value="1">
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-sm btn-plus rounded-circle bg-light border">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="mb-0 mt-4 total_price">{{c.stock.price}} &#8377;</p>
+                            </td>
+                            <td>
+                                <a href="?delid={{c.id}}" class="btn btn-md rounded-circle bg-light border mt-4"
+                                    onclick="return confirm('Delete this ?')">
+                                    <i class="fa fa-times text-danger"></i>
+                                </a>
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="row g-4 justify-content-end">
+                <div class="col-8"></div>
+                <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
+                    <div class="bg-light rounded">
+                        <div class="p-4">
+                            <h1 class="display-6 mb-4">Cart <span class="fw-normal">Total</span></h1>
+                            <div class="d-flex justify-content-between">
+                                <h5 class="mb-0 me-4">Shipping</h5>
+                                <p class="mb-0 text-end">Shipping to {{request.session.address}} .</p>
+                            </div>
+
+                        </div>
+                        <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
+                            <h5 class="mb-0 ps-4 me-4">Total</h5>
+                            <p class="mb-0 pe-4" id="grant_total">$99.00</p>
+                        </div>
+                        <button
+                            class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"
+                            type="submit">Proceed Checkout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- Cart Page End -->
+<script>
+    var find_total = () => {
+        var v = $('.total_price').text().split('₹')
+        t = 0
+        v.forEach(x => {
+            p = parseFloat(x)
+            if (!isNaN(p))
+                t += p
+        })
+        $('#grant_total').html(t.toFixed(2) + ' &#8377;')
+    }
+    find_total()
+    // Product Quantity
+    $('.quantity button').on('click', function () {
+        var button = $(this);
+        var oldValue = button.parent().parent().find('input').val();
+        if (button.hasClass('btn-plus')) {
+            var newVal = parseFloat(oldValue) + 1;
+        } else {
+            if (oldValue > 0) {
+                var newVal = parseFloat(oldValue) - 1;
+            } else {
+                newVal = 0;
+            }
+        }
+        button.parent().parent().find('input').val(newVal);
+        var p = parseFloat(button.parent().parent().parent().parent().find('.price').text())
+        button.parent().parent().parent().parent().find('.total_price').html((newVal * p).toFixed(2) + ' &#8377;')
+        find_total()
+    });
+</script>
+{% endblock content %}

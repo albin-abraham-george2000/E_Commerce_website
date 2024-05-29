@@ -1,0 +1,65 @@
+{% extends request.session.path %}
+
+{% block content %}
+<h3 class="alert alert-warning p-2 text-center">Do you want to modify this Product ?</h3>
+<form action="" method="post">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-md">
+            <div class="form-floating mb-3">
+                <input type="text" name="item" value="{{datas.item}}" class="form-control" placeholder="Item" required>
+                <label>Item</label>
+            </div>
+            <div class="mb-3">
+                <label>Description</label>
+                <textarea name="descr" class="form-control" rows="5" placeholder="Description" required>{{datas.descr}}</textarea>
+            </div>
+            <div class="form-floating mb-3">
+                {{form.category}}
+                <label>Category</label>
+            </div>
+            <div class="form-floating mb-3">
+                {{form.image}}
+                <label>Image</label>
+            </div>
+        </div>
+        <div class="col-md text-center">
+            <img src="{{datas.image.image.url}}" alt="Product" id="preview" height="200px" class="mb-3">
+            <div class="row mb-5">
+                <div class="col">
+                    <button class="btn btn-danger p-3 form-control mb-3">Update</button>
+                </div>
+                <div class="col">
+                    <a href="{% url request.session.group|add:'_product' %}" class="btn btn-warning p-3 form-control">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% if form.errors %}
+<div class="alert alert-danger text-center mt-3 pt-3 pb-0">
+    <ul>
+        {% for f in form %}
+        <li>{{f.label}}
+            {% if f.errors %}
+            {{f.errors}}
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+<script>
+    $(() => {
+        $('select').addClass('form-control')
+
+        $('#id_image').change(function () {
+            var v = $(this).val()
+            $.get('/admin_panel/image_get/' + v + '/')
+                .then((d) => {
+                    $('#preview').attr('src', d)
+                })
+        })
+    })
+</script>
+{% endblock content %}

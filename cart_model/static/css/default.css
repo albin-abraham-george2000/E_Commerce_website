@@ -1,0 +1,9 @@
+.footer {
+    position: fixed;
+    bottom: 0;
+    font-family: monospace;
+}
+
+textarea {
+    resize: none;
+}

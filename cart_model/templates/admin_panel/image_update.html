@@ -1,0 +1,32 @@
+{% extends request.session.path %}
+
+{% block content %}
+<h3 class="alert alert-danger p-2 text-center">Do you want to update this Image ?</h3>
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-md">
+            <div class="form-floating mb-3">
+                <input type="file" name="image" class="form-control" placeholder="Image" required>
+                <label>Image</label>
+            </div>
+            <div class="mb-3">
+                <label>Description</label>
+                <textarea name="descr" class="form-control" placeholder="Description" rows="5" required>{{datas.descr}}</textarea>
+            </div>
+        </div>
+        <div class="col-md text-center mb-5">
+            <img src="{{datas.image.url}}" height="200px" alt="{{datas.descr}}">
+            <div class="row">
+                <div class="col col-md-12">
+                    <button class="btn btn-success p-3 form-control mb-3">Update</button>
+                </div>
+                <div class="col col-md-12">
+                    <a href="{% url request.session.group|add:'_image' %}" class="btn btn-warning p-3 form-control">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock content %}

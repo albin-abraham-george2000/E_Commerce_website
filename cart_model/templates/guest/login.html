@@ -1,0 +1,43 @@
+{% extends "guest/layout.html" %}
+{% block content %}
+{% load static %}
+
+<!-- Checkout Page Start -->
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <h1 class="mb-4">Login</h1>
+        <form action="#" method="post" novalidate>
+            {% csrf_token %}
+            <div class="row g-5">
+                <div class="col-md-12 col-lg-6 col-xl-7">
+                    <div class="form-item w-100">
+                        <label class="form-label my-3">Email<sup>*</sup></label>
+                        <input type="email" name="email" class="form-control" placeholder="abc@mail.com" required>
+                        <div class="text-danger"> {{frm.errors.email}} </div>
+                    </div>
+                    <div class="form-item w-100">
+                        <label class="form-label my-3">Password<sup>*</sup></label>
+                        <input type="password" name="password" class="form-control" placeholder="Password" minlength="4"
+                            required>
+                        <div class="text-danger"> {{frm.errors.password}} </div>
+                    </div>
+                    <div class="form-item mt-2 text-center text-danger">
+                        {{msg}}
+                    </div>
+                    <div class="form-item">
+                        <div class="row g-4 text-center align-items-center justify-content-center pt-4">
+                            <button type="submit"
+                                class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary">Sign
+                                In</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-6 col-xl-5">
+                    <img src="/static/img/banner-fruits.jpg" alt="Sign In">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- Checkout Page End -->
+{% endblock content %}

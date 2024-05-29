@@ -1,0 +1,74 @@
+{% extends request.session.path %}
+
+{% block content %}
+<h3 class="alert alert-success p-2 text-center">Profile</h3>
+<form action="" method="post">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-md">
+            <div class="row">
+                <div class="col-md">
+                    <div class="form-floating mb-3">
+                        <input type="text" value="{{datas.first_name}}" name="first_name" class="form-control"
+                            placeholder="First Name" required>
+                        <label>First Name</label>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="form-floating mb-3">
+                        <input type="text" value="{{datas.last_name}}" name="last_name" class="form-control"
+                            placeholder="Last Name" required>
+                        <label>Last Name</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <div class="form-floating mb-3">
+                        <input type="text" value="{{datas.email}}" name="email" class="form-control"
+                            placeholder="E-Mail" required>
+                        <label>E-Mail</label>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="form-floating mb-3">
+                        <input type="text" value="{{datas.contact}}" name="contact" class="form-control"
+                            placeholder="Contact" required>
+                        <label>Contact</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="form-floating mb-3">
+                <input type="text" value="{{datas.groups.all.0}}" name="groups" class="form-control"
+                    placeholder="Group" readonly>
+                <label>Group</label>
+            </div>
+            <div class="mb-3">
+                <label>Address</label>
+                <textarea name="address" class="form-control"
+                    placeholder="Address" rows="5" required>{{datas.address}}</textarea>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-danger p-3 form-control mb-3">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% if form.errors %}
+<div class="alert alert-danger text-center mt-3 pt-3 pb-0">
+    <ul>
+        {% for f in form %}
+        {% if f.errors %}
+        <li>{{f.label}}
+            {{f.errors}}
+        </li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+{% endblock content %}

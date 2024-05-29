@@ -1,0 +1,34 @@
+{% extends request.session.path %}
+
+{% block content %}
+<div class="float-end mb-3">
+    <a href="{% url request.session.group|add:'_product_create' %}" class="btn btn-info">New</a>
+</div>
+
+<table class="table table-bordered table-hover table-striped">
+    <thead class="table-success">
+        <tr>
+            <th>Item</th> 
+            <th>Image</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Modify</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for d in datas %}
+        <tr>
+            <td> {{d.item}} </td>
+            <td class="text-center"> <img height="25px" src="{{d.image.image.url}}" alt="{{d.image.descr}}"> </td>
+            <td> {{d.descr}} </td>
+            <td> {{d.category}} </td>
+            <td style="width: 300px;">
+              <a href="{% url request.session.group|add:'_product_detail' d.id %}" class="btn btn-info"><i class="bi bi-card-list"></i> Detail</a>  
+              <a href="{% url request.session.group|add:'_product_update' d.id %}" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Edit</a>  
+              <a href="{% url request.session.group|add:'_product_delete' d.id %}" class="btn btn-danger"><i class="bi bi-trash3-fill"></i> Delete</a>  
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

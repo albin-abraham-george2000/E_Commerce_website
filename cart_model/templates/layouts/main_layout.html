@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="/static/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/lib/bootstrap/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/static/css/default.css">
+    <script src="/static/lib/jquery/jquery-3.7.1.min.js"></script>
+    <script src="/static/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/default.js"></script>
+</head>
+
+<body>
+    {% block menu %}
+    Menu
+    {% endblock menu %}
+    <div class="container mt-5 mb-5">
+        {% block content %}
+        Content
+        {% endblock content %}
+    </div>
+    <div class="footer bg-success text-white text-center w-100 p-3">
+        Copy Right @ Sherin KJ
+    </div>
+</body>
+
+</html>

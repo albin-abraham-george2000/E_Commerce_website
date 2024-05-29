@@ -1,0 +1,92 @@
+{% extends "guest/layout.html" %}
+{% block content %}
+{% load static %}
+<script>
+    var validatePwd = () => {
+        var p = $('#password').val()
+        var cp = $('#cpassword').val()
+        if (p === cp) return true
+        $('#msg').text("Password not matching ..")
+        return false
+    }
+</script>
+<!-- Checkout Page Start -->
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <h1 class="mb-4">Register</h1>
+        <form action="#" method="post" onsubmit="return validatePwd()">
+            {% csrf_token %}
+            <div class="row g-5">
+                <div class="col-md-12 col-lg-6 col-xl-7">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-6">
+                            <div class="form-item w-100">
+                                <label class="form-label my-3">First Name<sup>*</sup></label>
+                                <input type="text" name="first_name" class="form-control" placeholder="First Name"
+                                    pattern="[a-z A-Z]*" required>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-6">
+                            <div class="form-item w-100">
+                                <label class="form-label my-3">Last Name<sup>*</sup></label>
+                                <input type="text" name="last_name" class="form-control" placeholder="Last Name"
+                                    pattern="[a-z A-Z]*" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-lg-6">
+                            <div class="form-item w-100">
+                                <label class="form-label my-3">Mobile<sup>*</sup></label>
+                                <input type="text" name="contact" class="form-control" placeholder="Mobile"
+                                    pattern="[0-9]{10,12}" required>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-6">
+                            <div class="form-item w-100">
+                                <label class="form-label my-3">Email<sup>*</sup></label>
+                                <input type="email" name="email" class="form-control" placeholder="abc@mail.com"
+                                    required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <label class="form-label my-3">Address <sup>*</sup></label>
+                        <textarea class="form-control" cols="30" rows="5" placeholder="House Number Street Name"
+                            name="address" required></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-lg-6">
+                            <div class="form-item w-100">
+                                <label class="form-label my-3">Password<sup>*</sup></label>
+                                <input type="password" name="password" id="password" class="form-control"
+                                    placeholder="Password" minlength="4" required>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-6">
+                            <div class="form-item w-100">
+                                <label class="form-label my-3">Confirm Password<sup>*</sup></label>
+                                <input type="password" name="cpassword" id="cpassword" class="form-control"
+                                    placeholder="Confirm Password" minlength="4" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="msg" class="form-item mt-2 text-center text-danger">
+                        {{msg}}
+                    </div>
+                    <div class="form-item">
+                        <div class="row g-4 text-center align-items-center justify-content-center pt-4">
+                            <button type="submit"
+                                class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary">Register</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-6 col-xl-5">
+                    <img src="/static/img/baner-1.png" alt="Register">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- Checkout Page End -->
+{% endblock content %}

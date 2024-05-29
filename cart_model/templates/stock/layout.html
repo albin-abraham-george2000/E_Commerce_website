@@ -1,0 +1,57 @@
+{% extends 'layouts/main_layout.html' %}
+
+{% block menu %}
+<nav class="navbar navbar-expand-lg bg-success" data-bs-theme="dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/stock/">
+            <img src="/static/img/cart_3.png" alt="logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav w-100">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/stock/"><i class="bi bi-house-gear-fill"></i>
+                        Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="/stock/" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="bi bi-backpack3-fill"></i> Stock Management
+                    </a>
+                    <ul class="dropdown-menu bg-success">
+                        <li><a class="dropdown-item" href="/stock/category/"><i class="bi bi-collection-fill"></i>
+                                Category</a></li>
+                        <li><a class="dropdown-item" href="/stock/image/"><i class="bi bi-images"></i> Image</a>
+                        </li>
+                        <li><a class="dropdown-item" href="/stock/product/"><i class="bi bi-bag-heart-fill"></i>
+                                Product</a></li>
+                        <li><a class="dropdown-item" href="/stock/stock/"><i class="bi bi-backpack3-fill"></i>
+                                Stock</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/stock/purchase/">
+                        <i class="bi bi-bag-fill"></i> Orders</a>
+                </li>
+                <li class="nav-item dropdown ms-auto">
+                    <a class="nav-link dropdown-toggle" href="/stock/" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="bi bi-person-circle"></i> Welcome {{request.session.name}} (Stock Manager)
+                    </a>
+                    <ul class="dropdown-menu bg-success">
+                        <li><a class="dropdown-item" href="/stock/profile/"><i class="bi bi-person-vcard-fill"></i>
+                                Profile</a></li>
+                        <li><a class="dropdown-item" href="/stock/changepwd/"><i class="bi bi-key-fill"></i>
+                                Change Password</a></li>
+                        <li><a class="dropdown-item" href="/signout/"><i class="bi bi-box-arrow-right"></i> Sign Out</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+{% endblock menu %}

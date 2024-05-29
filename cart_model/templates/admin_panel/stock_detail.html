@@ -1,0 +1,47 @@
+{% extends request.session.path %}
+
+{% block content %}
+<h3 class="alert alert-success p-2 text-center">Stock Details</h3>
+    <div class="row">
+        <div class="col-md">
+            <div class="form-floating mb-3">
+                <input type="text" name="price" class="form-control" value="{{datas.product}}" readonly>
+                <label>Product</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="number" step="0.01" name="price" class="form-control" value="{{datas.price}}" readonly>
+                <label>Price</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" step="0.01" name="quantity" class="form-control" value="{{datas.quantity}}" readonly>
+                <label>Quantity</label>
+            </div>
+        </div>
+        <div class="col-md mb-5">
+            <div class="form-floating mb-3">
+                <input type="text" name="stock_date" id="stock_date" class="form-control" value="{{datas.stock_date}}" readonly>
+                <label>Stock Date</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" name="mfg_date" id="mfg_date" class="form-control" value="{{datas.mfg_date}}" readonly>
+                <label>Mfg. Date</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" id="exp_date" name="exp_date" class="form-control" value="{{datas.exp_date}}" readonly>
+                <label>Expiry Date</label>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <a href="{% url request.session.group|add:'_stock' %}" class="btn btn-warning p-3 form-control">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    $(() => {
+        $('select').attr('class', 'form-control')
+    })
+</script>
+{% endblock content %}
